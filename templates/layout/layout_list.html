@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="{{ gettext('local') }}">
+
+<head>
+    <title>{{ gettext("project_name") }} - {% block title %}{% endblock %}</title>
+    {% include 'layout/module/head.html' %}
+</head>
+
+<body>
+
+    {% include 'layout/module/menu.html' %}
+
+    <main role="main">
+
+
+    <section class="mt-4 mb-5">
+    <div class="container mb-4">
+    	<h1 class="font-weight-bold title">{% block bgtitle %}{% endblock %}</h1>
+    	<div class="row">
+    		<nav class="navbar navbar-expand-lg navbar-light bg-white pl-2 pr-2">
+    		<button class="navbar-light navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExplore" aria-controls="navbarsDefault" aria-expanded="false" aria-label="Toggle navigation">
+    		<span class="navbar-toggler-icon"></span>
+    		</button>
+    		{% block tag %}
+            {% endblock %}
+    		</nav>
+    	</div>
+    </div>
+    <div class="container-fluid">
+    	<div class="row">
+    		<div class="card-columns">
+
+                {% block content %}
+
+                {% endblock %}
+
+    		</div>
+    	</div>
+    {% block pagination %}
+
+    {% endblock %}
+    </div>
+    </section>
+
+    </main>
+
+   {% include 'layout/module/modal.html' %}
+
+    {% block modal %}
+
+    {% endblock %}
+
+    {% include 'layout/module/footer.html' %}
+
+    {% block js %}
+
+    {% endblock %}
+</body>
+
+</html>

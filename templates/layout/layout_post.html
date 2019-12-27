@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="{{ gettext('local') }}">
+
+<head>
+    <title>{{ gettext("project_name") }} - {{ gettext('Product_details') }}</title>
+    {% include 'layout/module/head.html' %}
+</head>
+
+<body>
+
+    {% include 'layout/module/menu.html' %}
+
+    <main role="main">
+
+
+    <section class="bg-gray200 pt-5 pb-5">
+    <div class="container">
+    	<div class="row justify-content-center">
+    		<div class="col-md-7">
+    			<article class="card">
+    			<img class="card-img-top mb-2" src="https://instagram.com/p/{{ media_id }}/media/?size=l" onerror="this.onerror=null;this.src='/static/themes/social/images/no-image.jpg'" alt="Card image">
+    			<div class="card-body">
+    				<div>
+                        <img class="rounded-circle mr-2" src="{{author_image}}" width="30"><span class="btn btn-sm btn-gray200 align-middle">@{{author_name}}</span>
+                        <span class="btn btn-sm btn-gray200"><i class="fas fa-eye"></i> {{ display }}</span>
+
+                        {% if current_user.is_authenticated %}
+
+                        {% if saved %}
+                            <span class="btn btn-sm btn-gray200" href="#"><i class="fas fa-bookmark"></i></span>
+                        {% else %}
+                            <span class="btn btn-sm btn-gray200" href="#"><i class="far fa-bookmark"></i></span>
+                        {% endif %}
+
+                        {% endif %}
+
+                        {% if type %}
+                            <span class="btn btn-sm btn-gray200"><i class="fas fa-gift"></i></span>
+                        {% else %}
+                            <span class="btn btn-sm btn-gray200"><i class="fas fa-dollar-sign"></i></span>
+                        {% endif %}
+                        <hr>
+                    </div>
+                    <p>
+    				    {{ media_description }}
+                    </p>
+                    <hr>
+    				<small class="d-block"><a target="_blank" class="btn btn-sm btn-gray200" href="{{ media_url }}"><i class="fas fa-external-link-alt"></i></a></small>
+
+    			</div>
+    			</article>
+    		</div>
+    	</div>
+    </div>
+
+    {%  if similar_product_count != 0  %}
+    <div class="container-fluid mt-5">
+    	<div class="row">
+    		<h5 class="font-weight-bold">{{ gettext('You_may_be_interested_in') }}</h5>
+    		<div class="card-columns">
+                {% for product in similar_product %}
+    			<div class="card card-pin">
+    				<img class="card-img" src="{{ product.media_image }}" onerror="this.onerror=null;this.src='/static/themes/social/images/no-image.jpg'" alt="Card image">
+    				<div class="overlay">
+    					<h2 class="card-title title">{{ product.author_name }}</h2>
+    					<div class="more">
+    						<a href="/view/{{ product.id_share }}">
+    						<i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> {{ gettext('Product_details') }} </a>
+    					</div>
+    				</div>
+    			</div>
+                {% endfor %}
+
+    		</div>
+    	</div>
+    </div>
+    {%  endif  %}
+    </section>
+
+    </main>
+
+    {% include 'layout/module/modal.html' %}
+
+    {% block modal %}
+
+    {% endblock %}
+
+    {% include 'layout/module/footer.html' %}
+
+    {% block js %}
+
+    {% endblock %}
+</body>
+
+</html>

@@ -1,0 +1,150 @@
+    <script src="{{ url_for('static', filename='themes/social/js/app.js') }}"></script>
+
+    <script src="{{ url_for('static', filename='themes/social/js/theme.js') }}"></script>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/8.11.8/sweetalert2.all.min.js"></script>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.js"></script>
+
+    <script async src="//www.googletagmanager.com/gtag/js?id=UA-126138111-3"></script>
+
+    <script>
+
+        $(document).ready(function () {
+            Search();
+        });
+
+
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-126138111-3');
+
+        function Feedback() {
+            $.ajax({
+                url: '/Feedback',
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    description: document.getElementById('feedback_description').value
+                },
+                success: function (result) {
+                        swal.close();
+                        alertbox(result.result,result.status);
+                        if(result.status)
+                        {
+                        $("#FeedbackModal").modal('hide');
+                        document.getElementById('feedback_description').value = "";
+                        }
+                        else
+                        {
+                        $("#FeedbackModal").modal('show');
+                        }
+
+
+                },
+                error: function (error) {
+                    swal.close();
+                    $("#FeedbackModal").modal('show');
+                    alertbox('{{ gettext("sorry_there_was_an_error") }}',false);
+                }
+            });
+        }
+
+        function alertbox(info,status) {
+            const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000
+                    });
+                    if(status)
+                    {
+                    Toast.fire({
+                    type: 'success',
+                    title: info
+                    })
+                    }
+                    else{
+                    Toast.fire({
+                    type: 'error',
+                    title: info
+                    })
+                    }
+
+        }
+
+        function loading(text) {
+
+            Swal.fire({
+                title: text,
+                onBeforeOpen: () => {
+                    Swal.showLoading()
+                },
+            })
+
+        }
+
+        function selectCountry(val) {
+            $("#tag-search").val(val);
+            $("#search-results").hide();
+        }
+
+        function Search() {
+            $("#tag-search").keyup(function () {
+                $.ajax({
+                    type: "POST",
+                    url: "/search",
+                    data: 'query=' + $(this).val(),
+                    beforeSend: function () {
+                        $("#tag-search").css("background", "#FFF url(LoaderIcon.gif) no-repeat 165px");
+                    },
+                    success: function (data) {
+                        $("#search-results").show();
+                        $("#search-results").html(data);
+                        $("#tag-search").css("background", "#FFF");
+                    }
+                });
+            })
+        }
+
+
+
+    </script>
+
+
+    <footer class="footer pt-5 pb-5 text-center">
+
+    <div class="container">
+
+          <div class="socials-media">
+
+            <ul class="list-unstyled">
+              <li class="d-inline-block ml-1 mr-1"><a target="_blank" href="https://www.facebook.com/lucksendapp/" class="text-dark"><i class="fab fa-facebook-square"></i></a></li>
+              <li class="d-inline-block ml-1 mr-1"><a target="_blank" href="https://www.instagram.com/lucksendapp/" class="text-dark"><i class="fab fa-instagram"></i></a></li>
+              <li class="d-inline-block ml-1 mr-1"><a target="_blank" href="https://play.google.com/store/apps/details?id=net.gulernet.cekilisaraci" class="text-dark"><i class="fab fa-google-play"></i></a></li>
+            </ul>
+
+          </div>
+
+            <!--
+              All the links in the footer should remain intact.
+              You may remove the links only if you donate:
+              https://www.wowthemes.net/freebies-license/
+            -->
+          <p>
+            <span class="credits">
+                <small>Copyright © Luck Send 2019</small>
+            </span>
+          </p>
+
+
+        </div>
+
+    </footer>

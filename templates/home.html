@@ -1,0 +1,73 @@
+{% extends 'layout/layout_list.html' %}
+
+{% block title %}
+{{ gettext("Explore") }}
+{% endblock %}
+
+{% block bgtitle %}
+{{ gettext("Explore") }}
+{% endblock %}
+
+{% block content %}
+
+    {% if socialmedias.items %}
+
+    {% for socialmedia in socialmedias.items %}
+    <div class="card card-pin">
+    	<img class="card-img" src="https://instagram.com/p/{{ socialmedia.media_id }}/media/?size=m" onerror="this.onerror=null;this.src='/static/themes/social/images/no-image.jpg'" alt="Card image">
+    		 <div class="overlay">
+                  <h2 class="card-title title">{{ socialmedia.author_name }}</h2>
+                      <div class="more">
+    					   <a href="/view/{{ socialmedia.id_share }}">
+    					   <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> {{ gettext('Product_details') }} </a>
+                      </div>
+    		</div>
+    </div>
+  {% endfor %}
+
+    {% else %}
+        <h5>{{ gettext("there_are_no_results") }}</h5>
+    {% endif %}
+
+{% endblock %}
+
+
+{% block pagination %}
+    <div class="col-md-2 m-auto">
+    {% if prev_url %}
+    <a class="btn btn-primary" href="{{ prev_url }}"><i class="fas fa-arrow-left"></i></a>
+    {% endif %}
+    {% if next_url %}
+    <a class="btn btn-primary" href="{{ next_url }}"><i class="fas fa-arrow-right"></i></a>
+    {% endif %}
+    </div>
+{% endblock %}
+
+
+{% block tag %}
+    <div class="collapse navbar-collapse" id="navbarsExplore">
+    			<ul class="navbar-nav">
+    				<li class="nav-item dropdown">
+    				<a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-hashtag"></i> {{ gettext('Trend_tags') }}</a>
+    				<div class="dropdown-menu shadow-lg" aria-labelledby="dropdown01">
+                        {% for tag in tags %}
+    					<a class="dropdown-item" href="/tag?id={{ tag['_id']['tag_id'] }}"><i class="fas fa-hashtag"></i> {{ tag['_id']['tag_name'] }}</a>
+                        {% endfor %}
+    				</div>
+    				</li>
+    			</ul>
+    		</div>
+{% endblock %}
+
+
+{% block modal %}
+
+
+{% endblock %}
+
+
+{% block js %}
+
+{% endblock %}
+
+

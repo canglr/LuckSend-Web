@@ -1,0 +1,118 @@
+{% extends 'layout/layout_content.html' %}
+
+{% block title %}
+{{ gettext('Add_product') }}
+{% endblock %}
+
+{% block bgtitle %}
+{{ gettext('Add_product') }}
+{% endblock %}
+
+{% block content %}
+
+
+
+<div class="form-group">
+
+              <div class="form-group">
+                <small><b><label>Link:</label></b></small>
+                  <div class="form-line">
+                      <input type="text" class="form-control" placeholder="https://www.instagram.com/p/B4Vxxx.../" autocomplete="off" id="socialmedia_link">
+                  </div>
+              </div>
+
+
+              <div class="form-group">
+                <small><b><label>{{ gettext('tags') }}:</label></b></small>
+                  <div class="form-line">
+                      <input type="text" class="form-control" autocomplete="off" id="socialmedia_tags">
+                  </div>
+              </div>
+
+              <div class="form-group">
+                <small><b><label>{{ gettext("Countries_to_be_published") }}:</label></b></small>
+                      <select id="socialmedia_countries_list">
+                      </select>
+              </div>
+
+                  <div class="form-group">
+                <small><b><label>{{ gettext('Product_type') }}:</label></b></small>
+                  <select class="form-control" id="socialmedia_type">
+                      <option value="null">{{ gettext('Choose') }}</option>
+                      <option value="false">{{ gettext('Product_sale') }}</option>
+                      <option value="true">{{ gettext('Product_raffle') }}</option>
+                  </select>
+              </div>
+
+              <button onclick="socialmedia_create();" class="btn btn-primary btn-sm"><i class="fas fa-check"></i></button>
+</div>
+
+
+
+
+{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.bootstrap3.css">
+{% endblock %}
+
+{% block js %}
+    <script src="https://momentjs.com/downloads/moment.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.js"></script>
+    <script>
+    SocialmediaCountriesList();
+    function SocialmediaCountriesList() {
+            $.ajax({
+                url: '/RaffleCountriesList',
+                type: 'POST',
+                dataType: 'json',
+                success: function (result) {
+                    let $selectupdate = $(document.getElementById('socialmedia_countries_list')).selectize();
+                    let selectizeupdate = $selectupdate[0].selectize;
+                    selectizeupdate.addOption(result);
+                },
+                error: function (error) {
+                    alertbox('sorry there was an error',false);
+                }
+            });
+        }
+
+        function socialmedia_create() {
+            $.ajax({
+                url: '/add',
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    link: document.getElementById('socialmedia_link').value,
+                    type: document.getElementById('socialmedia_type').value,
+                    tags: document.getElementById('socialmedia_tags').value,
+                    countries: $('#socialmedia_countries_list')[0].selectize.items.join(',')
+                },
+                success: function (result) {
+                        alertbox(result.api_result,result.api_status);
+                        if(result.api_status)
+                        {
+                            document.getElementById('socialmedia_link').value = '';
+                        }
+                },
+                error: function (error) {
+
+                    alertbox('sorry there was an error',false);
+                }
+            });
+        }
+
+let $select = $('#socialmedia_tags').selectize({
+    delimiter: ',',
+    persist: true,
+    maxTags: 4,
+    create: true
+    });
+
+$('#socialmedia_countries_list').selectize({
+	 maxItems: 10,
+     delimiter: ',',
+     persist: true
+    });
+    </script>
+{% endblock %}

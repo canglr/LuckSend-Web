@@ -1,0 +1,114 @@
+<div class="card">
+  <h5 class="card-header">{{ gettext("special_for_you") }}</h5>
+  <div class="card-body">
+        {% if secret_key %}
+
+             <div class="card col-md-12">
+                <div class="card-body">
+                    <h5 class="card-title">{{ gettext("contact_information") }}</h5>
+                    <p class="card-text">
+                        <small>{{ contact_information }}</small>
+                    </p>
+                </div>
+             </div>
+
+
+            <div class="card col-md-12 mt-4">
+                <div class="card-body">
+                    <h5 class="card-title">{{ gettext("secret_key") }}</h5>
+                    <p class="card-text">
+
+                        <div class="card">
+                            <div class="card-body">
+                                <small>{{ secret_key }}</small>
+                            </div>
+                        </div>
+
+                    </p>
+                </div>
+             </div>
+
+        {% else %}
+
+                        <div class="card">
+                            <div class="card-body text-center">
+                                <small>{{ gettext("you_dont_win") }}</small>
+                            </div>
+                        </div>
+
+        {% endif %}
+  </div>
+</div>
+
+<div class="card mt-4">
+  <h5 class="card-header">{{ gettext("winners") }}</h5>
+  <div class="card-body">
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col" class="text-capitalize">{{ gettext("ranking") }}</th>
+      <th scope="col" class="text-capitalize">{{ gettext("account_id") }}</th>
+      <th scope="col" class="text-capitalize">{{ gettext("name") }}</th>
+      <th scope="col" class="text-capitalize">{{ gettext("status") }}</th>
+      <th scope="col" class="text-capitalize">{{ gettext("communication_status") }}</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for winner in winners %}
+    <tr>
+      <td>{{ loop.index }}</td>
+      <td>{{ winner.id_share }}</td>
+      <td scope="row">{{ winner.name }} {% if winner.id_share == current_user.id_share %} ({{ gettext("you") }}) {% endif %}</td>
+      <td>
+        {% if winner.status %} {{ gettext("winning") }} {% else %} {{ gettext("replacement") }} {% endif %}
+      </td>
+      <td>
+        {% if winner.check_key %} {{ gettext("contact_established") }} {% else %} {{ gettext("couldnt_contact") }} {% endif %}
+     </td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+  </div>
+</div>
+
+
+{% if reserves %}
+<div class="card mt-4">
+  <h5 class="card-header">{{ gettext("reserves") }}</h5>
+  <div class="card-body">
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col" class="text-capitalize">{{ gettext("ranking") }}</th>
+      <th scope="col" class="text-capitalize">{{ gettext("account_id") }}</th>
+      <th scope="col" class="text-capitalize">{{ gettext("name") }}</th>
+      <th scope="col" class="text-capitalize">{{ gettext("status") }}</th>
+      <th scope="col" class="text-capitalize">{{ gettext("communication_status") }}</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for reserve in reserves %}
+    <tr>
+      <td>{{ loop.index }}</td>
+      <td>{{ reserve.id_share }}</td>
+      <td scope="row">{{ reserve.name }} {% if reserve.id_share == current_user.id_share %} ({{ gettext("you") }}) {% endif %}</td>
+      <td>
+        {% if reserve.status %} {{ gettext("winning") }} {% else %} {{ gettext("replacement") }} {% endif %}
+      </td>
+      <td>
+        {% if reserve.check_key %} {{ gettext("contact_established") }} {% else %} {{ gettext("couldnt_contact") }} {% endif %}
+      </td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+   </div>
+</div>
+{% endif %}
+
+

@@ -1,0 +1,122 @@
+{% extends 'layout/layout_content.html' %}
+
+{% block title %}
+{{ gettext('Raffle_search') }}
+{% endblock %}
+
+{% block bgtitle %}
+{{ gettext('Raffle_search') }}
+{% endblock %}
+
+{% block content %}
+    <div class="card">
+  <div class="card-body">
+<form action="/Search" method="get">
+  <div class="form-row">
+        <div class="form-group col-md-11">
+            <input type="text" class="form-control" value="{{ request.args.get("q", "") }}" autocomplete="off" placeholder="Çekiliş kodu" name="q">
+        </div>
+        <div class="form-group col-md-1">
+            <button class="btn btn-primary float-right" type="submit"><i class="fas fa-search"></i></button>
+        </div>
+  </div>
+</form>
+<div class="card">
+    <div class="card-body">
+{% if raffles.items %}
+<div class="table-responsive">
+   <table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">{{ gettext("title") }}</th>
+      <th scope="col">{{ gettext("creation") }}</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for raffle in raffles.items %}
+    <tr>
+      <td scope="row"><label title="{{ raffle.title }}">{{ raffle.title[:25] }}</label></td>
+      <td>{{ raffle.creation_date|datetime_short }} (UTC)</td>
+      <td>
+          {% if raffle.completed %} <button onclick="MyRaffleResult('{{ raffle.id_share|aes_encode }}');" type="button" class="btn btn-primary btn-sm"><i class="fas fa-box"></i></button>{% endif %}
+          <button onclick="RaffleUrl('{{ raffle.id_share }}');" type="button" class="btn btn-primary btn-sm"><i class="fas fa-link"></i></button>
+      </td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+</div>
+
+    {% if prev_url %}
+    <a class="btn btn-primary btn-sm" href="{{ prev_url }}"><i class="fas fa-arrow-left"></i></a>
+    {% endif %}
+    {% if next_url %}
+    <a class="btn btn-primary btn-sm" href="{{ next_url }}"><i class="fas fa-arrow-right"></i></a>
+    {% endif %}
+
+    {% endif %}
+</div>
+</div>
+  </div>
+    </div>
+{% endblock %}
+
+
+{% block modal %}
+
+    <div class="modal fade" id="UrlRaffleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">{{ gettext("share") }}</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">
+
+              <div class="card">
+                    <div class="card-body">
+                        <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <div class="input-group mb-2 mr-sm-2">
+                                    <div class="input-group-prepend">
+                                    <div class="input-group-text"><i class="fas fa-copy"></i></div>
+                                    </div>
+                                        <input type="text" readonly="readonly" class="form-control" autocomplete="off" id="raffle-link-share">
+                                    </div>
+
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <a class="btn btn-primary btn-sm float-right" target="_blank" id="raffle-link-external"><i class="fas fa-external-link-alt"></i></a>
+                                </div>
+                        </div>
+                    </div>
+              </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+{% endblock %}
+
+
+{% block js %}
+<script>
+        function RaffleUrl(id) {
+            $("#UrlRaffleModal").modal('show');
+            url = window.location.origin+"/share/"+id;
+            document.getElementById("raffle-link-share").value = url;
+            document.getElementById("raffle-link-external").href = url;
+            document.getElementById("raffle-link-share").onclick = function() {
+                this.select();
+                document.execCommand('copy');
+                alertbox('{{ gettext("copied") }}',true)
+            }
+        }
+</script>
+{% endblock %}
+
+

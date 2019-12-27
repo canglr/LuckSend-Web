@@ -1,0 +1,159 @@
+
+<!DOCTYPE html>
+<html lang="{{ gettext('local') }}">
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-play-app" content="app-id=net.gulernet.cekilisaraci">
+
+    <title>{{ gettext("project_name") }} - {{ gettext("login") }}</title>
+
+    <!-- Bootstrap core CSS-->
+      <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <!-- Custom fonts for this template-->
+      <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+
+      <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/jquery.smartbanner@0.1.0/jquery.smartbanner.css">
+
+      <link rel="stylesheet" href="{{ url_for('static', filename='themes/social/css/login/style.css') }}">
+
+      <link rel="stylesheet" href="{{ url_for('static', filename='themes/social/css/login/main.css') }}">
+
+
+  </head>
+
+  <body>
+
+
+  <div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100">
+				<form class="login100-form validate-form">
+
+                    <div class="container-login100-form-btn mb-5">
+
+                        <img id="logo" title="Luck Send" alt="Luck Send" src="https://lh3.googleusercontent.com/b_4kpPo88Hjg_VXcUmeIjVU1R8HXef6boB0DNPq0f7DlzLE4NV2eZXVB3_NU3QAdAA=s96-rw"/>
+
+					</div>
+
+
+					<span class="login100-form-title p-b-43">
+						{{ gettext("login") }}
+					</span>
+
+					<div class="container-login100-form-btn m-2">
+
+                        <a href="{{auth_url}}" class="login100-form-btn"> <i class="fab fa-google-play m-1"></i>  {{ gettext("Continue_with_Google") }}</a>
+
+					</div>
+
+                    <div class="container-login100-form-btn m-2">
+
+                        <a href="#" onclick="qrcode_start();" data-toggle="modal" data-target="#qrcodeModal" class="login100-form-btn"> <i class="fas fa-qrcode m-1"></i>  {{ gettext("Continue_with_QR_code") }}</a>
+
+					</div>
+
+
+
+
+				</form>
+                <div class="login100-more" id="bg-image"></div>
+                </div>
+			</div>
+		</div>
+
+
+    <div class="modal" id="qrcodeModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+      <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title"><i class="fas fa-qrcode"></i> {{ gettext("QR_code") }}</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+      <!-- Modal body -->
+            <div class="modal-body m-auto">
+                <img class="img-thumbnail" src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data={{ session['id']|aes_encode }}"/>
+            </div>
+
+      <!-- Modal footer -->
+
+
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+
+    <script src="//cdn.jsdelivr.net/npm/jquery.smartbanner@0.1.0/jquery.smartbanner.min.js"></script>
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-126138111-3"></script>
+
+  <script>
+      var qrcode_interval;
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-126138111-3');
+
+      $(function() { $.smartbanner({
+            title: "Luck Send",
+            author: "GULERNET",
+            icon: "https://lh3.googleusercontent.com/b_4kpPo88Hjg_VXcUmeIjVU1R8HXef6boB0DNPq0f7DlzLE4NV2eZXVB3_NU3QAdAA=s180-rw",
+        }) } )
+
+      $(document).ready(function () {
+
+       $.getJSON('/Bgimage', function(data) {
+            document.getElementById('bg-image').style.backgroundImage="url("+data.image_url+")";
+
+        });
+
+
+
+    });
+
+      $('#qrcodeModal').on('hidden.bs.modal', function () {
+            qrcode_stop();
+        });
+
+      function qrcode_start() {
+          qrcode_interval = setInterval(function(){
+            qrcode();},1500);
+      }
+
+      function qrcode_stop() {
+          clearInterval(qrcode_interval);
+      }
+
+      function qrcode() {
+        $.ajax({
+                url: '/QrcodeLogin',
+                type: 'POST',
+                dataType: 'json',
+                success: function (result) {
+
+                    if(result.status) {
+                        $('#qrcodeModal').modal('hide')
+                        location.reload();
+                    }
+
+                },
+                error: function (error) {
+
+
+                }
+            });
+    }
+  </script>
+
+  </body>
+</html>

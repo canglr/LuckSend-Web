@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="{{ gettext('local') }}">
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>{{ gettext("project_name") }} - Privacy Policy</title>
+
+    <!-- Bootstrap core CSS-->
+      <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+
+      <link rel="stylesheet" href="{{ url_for('static', filename='themes/social/css/share/style.css') }}">
+
+
+  </head>
+
+
+<body class="bg-dark">
+    <div id="blur"></div>
+    <div class="container col-md-8 mt-5 mb-5">
+      <div class="card card mx-auto">
+
+        <div class="card-body">
+            <h2 class="card-title">Privacy Policy</h2>
+            <h5>User data</h5>
+            <ul>
+                <li>The user data and device data are used to identify the contact in the application.</li>
+            </ul>
+
+            <h5>Data transfer</h5>
+            <ul>
+                <li>Application data is transferred to servers using ssl technology.</li>
+            </ul>
+
+            <h5>Camera</h5>
+            <ul>
+                <li>Qr code is required to read.</li>
+            </ul>
+
+            <h5>Log data</h5>
+            <ul>
+                <li>We want to inform you that whenever you use our Service, in a case of an error in the app we collect data and information (through third party products) on your phone called Log Data. This Log Data may include information such as your device Internet Protocol (“IP”) address, device name, operating system version, the configuration of the app when utilizing our Service, the time and date of your use of the Service, and other statistics.</li>
+            </ul>
+
+            <h5>Security</h5>
+            <ul>
+                <li>We value your trust in providing us your Personal Information, thus we are striving to use commercially acceptable means of protecting it. But remember that no method of transmission over the internet, or method of electronic storage is 100% secure and reliable, and we cannot guarantee its absolute security.</li>
+            </ul>
+
+            <h5>Changes to This Privacy Policy</h5>
+            <ul>
+                <li>We may update our Privacy Policy from time to time. Thus, you are advised to review this page periodically for any changes. We will notify you of any changes by posting the new Privacy Policy on this page. These changes are effective immediately after they are posted on this page.</li>
+            </ul>
+
+            <i>Last changed: 21.09.2019</i>
+      </div>
+      </div>
+    </div>
+
+
+
+
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <script async src="//www.googletagmanager.com/gtag/js?id=UA-126138111-3"></script>
+
+    <script>
+
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-126138111-3');
+
+        $(document).ready(function () {
+
+       $.getJSON('/Bgimage', function(data) {
+            document.getElementById('blur').style.backgroundImage="url("+data.image_url+")";
+
+        });
+
+    });
+    </script>
+</body>
+
+
+
+</html>

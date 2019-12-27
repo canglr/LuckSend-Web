@@ -1,0 +1,52 @@
+{% extends 'layout/layout_content.html' %}
+
+{% block title %}
+{{ gettext("accountdetails") }}
+{% endblock %}
+
+{% block bgtitle %}
+{{ gettext("accountdetails") }}
+{% endblock %}
+
+{% block content %}
+
+    <div class="card">
+    <div class="card-body">
+{% if logs.items %}
+<div class="table-responsive">
+   <table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">{{ gettext("action") }}</th>
+      <th scope="col">{{ gettext("ip_address") }}</th>
+      <th scope="col">{{ gettext("date_of_action") }}</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for log in logs.items %}
+    <tr>
+      <td scope="row">{{ gettext(log.action) }}</td>
+      <td>{{ log.ip_address }}</td>
+      <td>{{ log.creation_date|datetime_short }} (UTC)</td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+</div>
+
+    {% if prev_url %}
+    <a class="btn btn-primary btn-sm" href="{{ prev_url }}"><i class="fas fa-arrow-left"></i></a>
+    {% endif %}
+    {% if next_url %}
+    <a class="btn btn-primary btn-sm" href="{{ next_url }}"><i class="fas fa-arrow-right"></i></a>
+    {% endif %}
+
+    {% else %}
+        <div class="col-md-12 text-center">
+            <h5>{{ gettext("there_are_no_results") }}</h5>
+        </div>
+    {% endif %}
+        </div>
+</div>
+
+{% endblock %}

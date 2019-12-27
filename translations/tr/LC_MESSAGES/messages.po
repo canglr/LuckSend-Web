@@ -1,0 +1,564 @@
+# Turkish translations for PROJECT.
+# Copyright (C) 2019 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2019-02-07 22:16+0300\n"
+"PO-Revision-Date: 2019-02-07 22:18+0300\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: tr\n"
+"Language-Team: tr <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+
+msgid "local"
+msgstr "tr"
+
+
+msgid "project_name"
+msgstr "Luck Send"
+
+
+msgid "account_id"
+msgstr "hesap no"
+
+
+msgid "name_surname"
+msgstr "ad soyad"
+
+
+msgid "registration_date"
+msgstr "kayıt tarihi"
+
+
+msgid "last_update"
+msgstr "son güncelleme"
+
+
+msgid "dashboard"
+msgstr "Pano"
+
+
+msgid "raffle_management"
+msgstr "Çekiliş Yönetimi"
+
+
+msgid "create_raffle"
+msgstr "Çekiliş Oluştur"
+
+
+msgid "sweepstakes_i_manage"
+msgstr "Yönettiğim çekilişler"
+
+
+msgid "raffles"
+msgstr "Çekilişler"
+
+
+msgid "join_the_raffle"
+msgstr "Çekilişe Katılın"
+
+
+msgid "list_my_participations"
+msgstr "Katılımlarımı Listele"
+
+
+msgid "profile"
+msgstr "Profil"
+
+
+msgid "logout"
+msgstr "Çıkış Yap"
+
+
+msgid "ok"
+msgstr "Tamam"
+
+
+msgid "cancel"
+msgstr "İptal"
+
+
+msgid "are_you_sure_you_want_to_leave"
+msgstr "Ayrılmak istediğinden emin misin?"
+
+
+msgid "info_logout"
+msgstr "Geçerli oturumunuzu sonlandırmaya hazırsanız, aşağıdaki 'Çıkış Yap' ı seçin."
+
+
+
+msgid "login"
+msgstr "Giriş"
+
+
+msgid "last_sweepstakes"
+msgstr "Son Katıldığım Çekilişler"
+
+
+msgid "title"
+msgstr "Başlık"
+
+
+msgid "creation"
+msgstr "Oluşturulma"
+
+
+msgid "updated"
+msgstr "Güncellenme"
+
+
+msgid "there_are_no_results"
+msgstr "Sonuç yok"
+
+
+msgid "description"
+msgstr "Açıklama"
+
+
+msgid "contact_information"
+msgstr "İletişim bilgileri"
+
+
+msgid "winning_and_replacement_contacts_can_be_seen"
+msgstr "Kazanan ve yedek kişiler görülebilir."
+
+
+msgid "number_of_People_to_Win"
+msgstr "Kazanacak Kişi Sayısı"
+
+
+msgid "number_of_replacement_people"
+msgstr "Yedek kişi sayısı"
+
+
+msgid "the_end_date"
+msgstr "Bitiş tarihi"
+
+
+msgid "update_raffle"
+msgstr "Çekiliş Güncelle"
+
+
+msgid "number_of_winners"
+msgstr "Talihli"
+
+
+msgid "number_of_backups"
+msgstr "Yedek"
+
+
+msgid "the_number_of_participants"
+msgstr "Katılımcı"
+
+
+msgid "last_participation_date"
+msgstr "Son katılım tarihi"
+
+
+msgid "start_the_draw"
+msgstr "Çekilişi başlat"
+
+
+msgid "raffle_statistics"
+msgstr "Çekiliş İstatistikleri"
+
+
+msgid "start_a_draw"
+msgstr "Çekiliş başlatılsın mı ?"
+
+
+msgid "the_return_of_the_process_is_not_possible"
+msgstr "İşlemin geri dönüşü mümkün değildir."
+
+
+msgid "delete_the_raffle"
+msgstr "Çekiliş silinsin mi ?"
+
+
+msgid "raffle_results"
+msgstr "Çekiliş Sonuçları"
+
+
+msgid "status"
+msgstr "Statü"
+
+
+msgid "loading"
+msgstr "Yükleniyor"
+
+
+msgid "sorry_there_was_an_error"
+msgstr "Maalesef bir hata oluştu"
+
+
+msgid "processing"
+msgstr "İşleniyor"
+
+
+msgid "no_statistics_has_been_found_for_the_time_being"
+msgstr "Şu an için istatistik bulunamadı."
+
+
+msgid "participation"
+msgstr "Katılım"
+
+
+msgid "querying"
+msgstr "Sorgulanıyor"
+
+
+msgid "winning"
+msgstr "Kazanan"
+
+
+msgid "replacement"
+msgstr "Yedek"
+
+
+msgid "date_of_participation"
+msgstr "Katılım Tarihi"
+
+
+msgid "Feedback"
+msgstr "Geri bildirim"
+
+
+msgid "you_took_the_lottery"
+msgstr "Çekilişe Katıldın"
+
+
+msgid "the_title_cannot_be_blank"
+msgstr "Başlık boş bırakılamaz !"
+
+
+msgid "description_cannot_be_left_blank"
+msgstr "Açıklama boş bırakılamaz !"
+
+
+msgid "contact_information_cannot_be_blank"
+msgstr "İletişim bilgileri boş bırakılamaz !"
+
+
+msgid "end_date_cannot_be_blank"
+msgstr "Bitiş tarihi boş bırakılamaz !"
+
+
+msgid "the_number_of_winners_cannot_be_blank"
+msgstr "Kazanacak kişi sayısı boş bırakılamaz !"
+
+
+msgid "the_number_of_replacement_people_cannot_be_blank"
+msgstr "Yedek kişi sayısı boş bırakılamaz !"
+
+
+msgid "the_number_of_people_to_win_cannot_be_less_than_zero_or_zero"
+msgstr "Kazanacak kişi sayısı sıfır ve sıfırdan küçük olamaz !"
+
+
+msgid "the_number_of_backup_contacts_cannot_be_less_than_zero"
+msgstr "Yedek kişi sayısı sıfırdan küçük olamaz !"
+
+
+msgid "the_title_cannot_be_greater_than_60_characters"
+msgstr "Başlık 60 karakterden büyük olamaz !"
+
+
+msgid "the_description_cannot_be_greater_than_350_characters"
+msgstr "Açıklama 350 karakterden büyük olamaz !"
+
+
+msgid "contact_information_cannot_be_greater_than_350_characters"
+msgstr "İletişim bilgileri 350 karakterden büyük olamaz !"
+
+
+msgid "the_number_of_people_who_will_win_can_not_be_more_than_50"
+msgstr "Kazanacak kişi sayısı 50 kişiden daha fazla olamaz !"
+
+
+msgid "the_number_of_reserve_persons_cannot_be_more_than_50"
+msgstr "Yedek kişi sayısı 50 kişiden daha fazla olamaz !"
+
+
+msgid "raffle_created"
+msgstr "Çekiliş Oluşturuldu"
+
+
+msgid "the_lottery_doesnt_update_because_it_started"
+msgstr "Çekiliş başlatıldığı için güncellenmiyor !"
+
+
+msgid "raffle_deleted_update_failed"
+msgstr "Çekiliş silindi güncelleme başarısız oldu"
+
+
+msgid "raffle_updated"
+msgstr "Çekiliş Güncellendi"
+
+
+msgid "no_raffles_found"
+msgstr "Çekiliş bulunamadı"
+
+
+msgid "no_attendance_for_the_raffle_was_deleted"
+msgstr "Çekiliş silindiği için katılım gerçekleşmedi"
+
+
+msgid "ended_participation"
+msgstr "Katılım sona erdi"
+
+
+msgid "you_cant_participate_in_your_own_lottery"
+msgstr "Kendi oluşturduğun çekilişe katılamazsın !"
+
+
+msgid "you_ve_already_joined"
+msgstr "Çekilişe katılmışsın"
+
+
+msgid "sufficient_participants_could_not_be_provided"
+msgstr "Yeterli sayıda katılımcı sağlanamadı"
+
+
+msgid "the_raffle_has_already_started"
+msgstr "Çekiliş zaten başlatılmış"
+
+
+msgid "cannot_start_because_the_raffle_was_deleted"
+msgstr "Çekiliş silindiğinden başlatılamıyor"
+
+
+msgid "the_raffle_starts_in_minutes"
+msgstr "Çekiliş 10 dakika sonra başlıyor"
+
+
+msgid "your_deletion_request_has_already_been_received"
+msgstr "Silme isteğiniz zaten alınmış"
+
+
+msgid "could_not_be_deleted_because_the_lottery_was_started"
+msgstr "Çekiliş başlatıldığından silinemedi"
+
+
+msgid "your_request_for_deletion_has_been_received"
+msgstr "Silme isteğiniz alındı"
+
+
+msgid "no_contact_found"
+msgstr "Kişi bulunamadı"
+
+
+msgid "feedback_cant_be_left_blank"
+msgstr "Geri bildirim boş bırakılamaz !"
+
+
+msgid "the_feedback_cannot_be_more_than_350_characters"
+msgstr "Geri bildirim 350 karakterden fazla olamaz !"
+
+
+msgid "send"
+msgstr "Gönderildi"
+
+
+msgid "ranking"
+msgstr "Sıralama"
+
+
+msgid "query"
+msgstr "Sorgula"
+
+
+msgid "name"
+msgstr "Ad"
+
+
+msgid "surname"
+msgstr "Soyad"
+
+
+msgid "secret_key"
+msgstr "Gizli anahtar"
+
+
+msgid "winners"
+msgstr "Kazananlar"
+
+
+msgid "reserves"
+msgstr "Yedekler"
+
+
+msgid "personal_information"
+msgstr "Kişi Bilgileri"
+
+
+msgid "special_for_you"
+msgstr "Size Özel"
+
+
+msgid "you_dont_win"
+msgstr "Kazanamadın"
+
+
+msgid "you"
+msgstr "Siz"
+
+
+msgid "accountdetails"
+msgstr "Hesap Detayları"
+
+
+msgid "action"
+msgstr "Eylem"
+
+
+msgid "ip_address"
+msgstr "İp Adresi"
+
+
+msgid "date_of_action"
+msgstr "Eylem Tarihi"
+
+
+msgid "share"
+msgstr "Paylaş"
+
+
+msgid "copied"
+msgstr "Kopyalandı"
+
+
+msgid "communication_status"
+msgstr "İletişim Durumu"
+
+
+msgid "contact_established"
+msgstr "İletişim kuruldu"
+
+
+msgid "couldnt_contact"
+msgstr "İletişim kurulamadı"
+
+
+msgid "tags"
+msgstr "Etiketler"
+
+
+msgid "at_least_two_labels_must_be_entered"
+msgstr "En az iki etiket girilmelidir."
+
+
+msgid "up_to_four_labels_must_be_entered"
+msgstr "En fazla dört etiket girilmelidir."
+
+
+msgid "At_least_one_country_must_be_selected"
+msgstr "En az bir ülke seçilmelidir."
+
+
+msgid "Up_to_ten_countries_must_be_selected"
+msgstr "En fazla on ülke seçilmelidir."
+
+
+msgid "Is_unavailable_in_your_country"
+msgstr "Ülkenizde kullanılamıyor."
+
+
+msgid "raffle_disabled"
+msgstr "çekiliş devre dışı"
+
+
+msgid "Countries_to_be_published"
+msgstr "Yayınlanacak ülkeler"
+
+
+msgid "QR_code"
+msgstr "Kare kod"
+
+
+msgid "Continue_with_Google"
+msgstr "Google ile devam et"
+
+
+msgid "Continue_with_QR_code"
+msgstr "Kare kod ile devam et"
+
+
+msgid "QR_code_generated"
+msgstr "Kare kod oluşturuldu"
+
+
+msgid "QR_code_was_used"
+msgstr "Kare kod kullanıldı"
+
+
+msgid "url_cannot_be_empty"
+msgstr "url boş olamaz"
+
+
+msgid "select_product_type"
+msgstr "ürün tipini seçiniz"
+
+
+msgid "The_product_has_been_sent"
+msgstr "Ürün gönderildi"
+
+
+msgid "404_not_found"
+msgstr "404 Bulunamadı"
+
+
+msgid "invalid_url"
+msgstr "geçersiz url"
+
+
+msgid "Add_product"
+msgstr "Ürün ekle"
+
+
+msgid "Product_type"
+msgstr "Ürün tipi"
+
+
+msgid "Choose"
+msgstr "Seçiniz"
+
+
+msgid "Product_sale"
+msgstr "Ürün satışı"
+
+
+msgid "Product_raffle"
+msgstr "Ürün çekilişi"
+
+
+msgid "Raffle_search"
+msgstr "Çekiliş ara"
+
+
+msgid "Explore"
+msgstr "Keşfet"
+
+
+msgid "Trend_tags"
+msgstr "Trend etiketler"
+
+
+msgid "Product_details"
+msgstr "Ürün detayları"
+
+
+msgid "You_may_be_interested_in"
+msgstr "İlginizi çekebilir"
+
+
+msgid "Search"
+msgstr "Ara"

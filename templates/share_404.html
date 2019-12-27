@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="{{ gettext('local') }}">
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-play-app" content="app-id=net.gulernet.cekilisaraci">
+
+    <title>{{ gettext("project_name") }} - 404</title>
+
+    <!-- Bootstrap core CSS-->
+      <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+
+      <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/jquery.smartbanner@0.1.0/jquery.smartbanner.css">
+
+      <link rel="stylesheet" href="{{ url_for('static', filename='themes/social/css/share/style.css') }}">
+
+
+  </head>
+
+
+<body class="bg-dark">
+    <div id="blur"></div>
+    <div class="container col-md-4 mt-5 mb-5">
+      <div class="card card mx-auto">
+
+        <div class="card-body text-center">
+            <h1>404</h1>
+      </div>
+      </div>
+    </div>
+
+
+
+
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <script src="//cdn.jsdelivr.net/npm/jquery.smartbanner@0.1.0/jquery.smartbanner.min.js"></script>
+
+    <script async src="//www.googletagmanager.com/gtag/js?id=UA-126138111-3"></script>
+
+    <script>
+
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-126138111-3');
+
+        $(function() { $.smartbanner({
+            title: "Luck Send",
+            author: "GULERNET",
+            icon: "https://lh3.googleusercontent.com/b_4kpPo88Hjg_VXcUmeIjVU1R8HXef6boB0DNPq0f7DlzLE4NV2eZXVB3_NU3QAdAA=s180-rw",
+        }) } )
+
+        $(document).ready(function () {
+
+       $.getJSON('/Bgimage', function(data) {
+            document.getElementById('blur').style.backgroundImage="url("+data.image_url+")";
+
+        });
+
+    });
+    </script>
+</body>
+
+
+
+</html>

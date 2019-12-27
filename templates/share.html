@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="{{ gettext('local') }}">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="keywords" content="{% for tag in tags %}{{ tags[loop.index0][0] }}{% if not loop.last %},{% endif %}{% endfor %}" />
+    <meta name="description" content="{{ raffle.description }}">
+    <meta name="google-play-app" content="app-id=net.gulernet.cekilisaraci">
+
+    <title>{{ gettext("project_name") }} - {{ raffle.title }}</title>
+
+    <!-- Bootstrap core CSS-->
+      <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <!-- Custom fonts for this template-->
+      <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+
+
+      <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/jquery.smartbanner@0.1.0/jquery.smartbanner.css">
+
+      <link rel="stylesheet" href="{{ url_for('static', filename='themes/social/css/share/style.css') }}">
+
+
+  </head>
+
+
+
+<body>
+<div id="blur"></div>
+
+{%- if current_user.is_authenticated -%}
+<div class="col-md-3 bg-secondary fixed-top mx-auto rounded-bottom">
+        <div class="media align-items-end">
+              <div class="profile mr-3"><img src="{{current_user.profile_picture}}" alt="{{current_user.name}}" title="{{current_user.name}}" width="55" class="rounded mb-2 rounded-circle"></div>
+              <div class="media-body text-white">
+                  <h6 class="mt-2">{{current_user.name}}</h6>
+                   <p class="small">{{current_user.id_share}}</p>
+              </div>
+        </div>
+</div>
+{%- endif -%}
+
+
+
+<div class="py-5 px-4">
+    <div class="col-xl-8 col-md-6 col-sm-10 mx-auto">
+
+
+        <div class="bg-white shadow rounded overflow-hidden">
+            <div class="px-4 pt-0 pb-4 bg-dark rounded-top">
+                <div class="media align-items-end profile-header">
+                    <input id="id" value="{{ id_share }}" type="hidden">
+                    <div class="profile mr-3"><img src="https://api.qrserver.com/v1/create-qr-code/?size=130x130&data={{ qr_code }}" alt="{{ qr_code }}" width="130" class="rounded mb-2 img-thumbnail"><a href="javascript:void(0)" id="rafflejoin" {%- if user_raffle_join_count > 0 -%} disabled="disabled" {%- endif -%} class="btn btn-dark btn-sm btn-block">{%- if user_raffle_join_count > 0 -%} {{ gettext("you_took_the_lottery") }} {% else %} {{ gettext("join_the_raffle") }} {%- endif -%}</a></div>
+                    <div class="media-body mb-5 text-white">
+                        <h6 class="mt-0 mb-0">{{ raffle.title }}</h6>
+                        <p class="small mb-0">{% for tag in tags %}#{{ tag[0] }} {% endfor %}</p>
+                        <p class="small mb-0"><span id="expiration"></span></p>
+                        <p class="small mb-4">{{ qr_code }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-light p-4 d-flex justify-content-end text-center">
+                <ul class="list-inline mb-0">
+                    <li class="list-inline-item" data-toggle="tooltip" data-placement="top" title="{{ gettext("the_number_of_participants") }}">
+                        <h5 class="font-weight-bold mb-0 d-block">{{ raffle_join_count }}</h5><small class="text-muted"><i class="fas fa-users"></i></small>
+                    </li>
+                    <li class="list-inline-item" data-toggle="tooltip" data-placement="top" title="{{ gettext("number_of_winners") }}">
+                        <h5 class="font-weight-bold mb-0 d-block">{{ raffle.winners }}</h5><small class="text-muted"><i class="fas fa-user"></i></small>
+                    </li>
+                    <li class="list-inline-item" data-toggle="tooltip" data-placement="top" title="{{ gettext("number_of_backups") }}">
+                        <h5 class="font-weight-bold mb-0 d-block">{{ raffle.reserves }}</h5><small class="text-muted"><i class="far fa-user"></i></small>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="py-4 px-4">
+                <div class="py-4">
+                    <h5 class="mb-3">{{ gettext("description") }}</h5>
+                    <div class="p-4 bg-light rounded shadow-sm">
+                        <p class="mb-0">{{ raffle.description }}</p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/8.11.8/sweetalert2.all.min.js"></script>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+
+    <script src="//cdn.jsdelivr.net/npm/jquery.smartbanner@0.1.0/jquery.smartbanner.min.js"></script>
+
+    <script async src="//www.googletagmanager.com/gtag/js?id=UA-126138111-3"></script>
+
+
+  <script type="text/javascript">
+
+      $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+      })
+
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-126138111-3');
+
+    $(function() { $.smartbanner({
+            title: "Luck Send",
+            author: "GULERNET",
+            icon: "https://lh3.googleusercontent.com/b_4kpPo88Hjg_VXcUmeIjVU1R8HXef6boB0DNPq0f7DlzLE4NV2eZXVB3_NU3QAdAA=s180-rw",
+        }) } )
+
+    $(document).ready(function () {
+        var StringtoUtc  = moment.utc('{{ raffle.expiration }}').toDate();
+        $('#expiration').html(moment(StringtoUtc).format("YYYY-MM-DD HH:mm:ss"));
+
+        $("#rafflejoin").click(function () {
+            login_status = "{%- if current_user.is_authenticated -%} true {%- else -%} false {%- endif -%}";
+            if(login_status == "true")
+            {
+                loading('{{ gettext("processing") }}')
+                rafflejoin();
+            }else{
+                window.location.replace("/login?redirect="+window.location.pathname);
+            }
+        });
+    });
+    function rafflejoin() {
+        $.ajax({
+                url: '/JoinRaffle',
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    id: document.getElementById('id').value
+                },
+                success: function (result) {
+                    swal.close();
+                    if(result.status) {
+                        document.getElementById('rafflejoin').disabled = true;
+                    }
+                    alertbox(result.result,result.status);
+                },
+                error: function (error) {
+                    swal.close();
+                    alertbox('{{ gettext("sorry_there_was_an_error") }}',false);
+                }
+            });
+    }
+
+
+    function alertbox(info,status) {
+            const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000
+                    });
+                    if(status)
+                    {
+                    Toast.fire({
+                    type: 'success',
+                    title: info
+                    })
+                    }
+                    else{
+                    Toast.fire({
+                    type: 'error',
+                    title: info
+                    })
+                    }
+
+        }
+
+
+        function loading(text) {
+
+            Swal.fire({
+                title: text,
+                onBeforeOpen: () => {
+                    Swal.showLoading()
+                },
+            })
+
+        }
+
+
+        $(document).ready(function () {
+
+       $.getJSON('/Bgimage', function(data) {
+            document.getElementById('blur').style.backgroundImage="url("+data.image_url+")";
+
+        });
+
+
+
+    });
+</script>
+
+
+</body>
+
+
+</html>

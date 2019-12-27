@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="{{ gettext('local') }}">
+
+<head>
+    <title>{{ gettext("project_name") }} - 404</title>
+    {% include 'layout/module/head.html' %}
+</head>
+
+<body>
+
+    {% include 'layout/module/menu.html' %}
+
+    <main role="main">
+
+
+    <section class="bg-gray200 pt-5 pb-5">
+    <div class="container">
+    	<div class="row justify-content-center">
+    		<div class="col-md-7">
+    			<article class="card">
+    			<div class="card-body text-center">
+    				<h1>404</h1>
+    			</div>
+    			</article>
+    		</div>
+    	</div>
+    </div>
+
+
+    </section>
+
+    </main>
+
+    {% include 'layout/module/modal.html' %}
+
+    {% block modal %}
+
+    {% endblock %}
+
+    {% include 'layout/module/footer.html' %}
+
+    {% block js %}
+
+    {% endblock %}
+</body>
+
+</html>

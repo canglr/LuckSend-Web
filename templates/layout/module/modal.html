@@ -1,0 +1,95 @@
+    {% if current_user.is_authenticated %}
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">{{ gettext("are_you_sure_you_want_to_leave") }}</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">{{ gettext("info_logout") }}</div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary btn-sm" type="button" data-dismiss="modal"><i class="fas fa-times"></i></button>
+            <a class="btn btn-primary btn-sm" href="/logout"><i class="fas fa-sign-out-alt"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="modal fade" id="ProfileModal" tabindex="-1" role="dialog" aria-labelledby="ProfileModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">{{ gettext("profile") }}</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">
+
+              <div class="container">
+                 <div class="row">
+                     <div class="col">
+      <img src="{{current_user.profile_picture}}" alt="{{current_user.name}}" class="img-thumbnail rounded-circle">
+                     </div>
+
+                     <div class="col">
+                          <div class="form-group input-group-sm">
+                             <label><span class="badge badge-secondary text-capitalize">{{ gettext("account_id") }}</span></label><br>
+                             <small><label>{{current_user.id_share}}</label></small>
+
+                             <br>
+
+                             <label><span class="badge badge-secondary text-capitalize">{{ gettext("name_surname") }}</span></label><br>
+                             <small><label class="text-capitalize">{{current_user.name}}</label></small>
+
+                              <br>
+
+                              <label><span class="badge badge-secondary text-capitalize">{{ gettext("registration_date") }}</span></label><br>
+                             <small><label class="text-capitalize">{{current_user.creation_date|datetime_short}} </label></small>
+
+                              <br>
+
+                              <label><span class="badge badge-secondary text-capitalize">{{ gettext("last_update") }}</span></label><br>
+                             <small><label class="text-capitalize">{{current_user.last_update|datetime_short}} </label></small>
+                         </div>
+
+                     </div>
+                </div>
+              </div>
+
+
+          </div>
+
+            <div class="modal-footer">
+            <a href="/AccountDetails" class="btn btn-primary btn-sm"><i class="fas fa-info"></i></a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="modal fade" id="FeedbackModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">{{ gettext("Feedback") }}</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">
+              <textarea id="feedback_description" class="form-control" rows="6"></textarea>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary btn-sm" type="button" data-dismiss="modal"><i class="fas fa-times"></i></button>
+            <button class="btn btn-primary btn-sm" data-dismiss="modal" onclick="Feedback();" type="button"><i class="fas fa-check"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endif %}

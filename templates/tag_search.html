@@ -1,0 +1,5 @@
+{% if tags != 0 %}
+{% for tag in tags %}
+    <a class="dropdown-item" href="/tag?id={{ tag.id }}"><i class="fas fa-hashtag"></i> {{ tag.tag_name }}</a>
+{% endfor %}
+{% endif %}

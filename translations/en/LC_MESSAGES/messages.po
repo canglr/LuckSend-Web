@@ -1,0 +1,563 @@
+# English translations for PROJECT.
+# Copyright (C) 2019 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2019-02-07 22:16+0300\n"
+"PO-Revision-Date: 2019-02-07 22:18+0300\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: en\n"
+"Language-Team: en <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+
+msgid "local"
+msgstr "en"
+
+
+msgid "project_name"
+msgstr "Luck Send"
+
+
+msgid "account_id"
+msgstr "account id"
+
+
+msgid "name_surname"
+msgstr "name surname"
+
+
+msgid "registration_date"
+msgstr "registration date"
+
+
+msgid "last_update"
+msgstr "last update"
+
+
+msgid "dashboard"
+msgstr "Dashboard"
+
+
+msgid "raffle_management"
+msgstr "Raffle Management"
+
+
+msgid "create_raffle"
+msgstr "Create Raffle"
+
+
+msgid "sweepstakes_i_manage"
+msgstr "Sweepstakes I manage"
+
+
+msgid "raffles"
+msgstr "Raffles"
+
+
+msgid "join_the_raffle"
+msgstr "Join the Raffle"
+
+
+msgid "list_my_participations"
+msgstr "List My Participations"
+
+
+msgid "profile"
+msgstr "Profile"
+
+
+msgid "logout"
+msgstr "Logout"
+
+
+msgid "ok"
+msgstr "Ok"
+
+
+msgid "cancel"
+msgstr "Cancel"
+
+
+msgid "are_you_sure_you_want_to_leave"
+msgstr "Are you sure you want to leave?"
+
+
+msgid "info_logout"
+msgstr "Select 'Logout' below if you are ready to end your current session."
+
+
+msgid "login"
+msgstr "Login"
+
+
+msgid "last_sweepstakes"
+msgstr "Last Sweepstakes"
+
+
+msgid "title"
+msgstr "Title"
+
+
+msgid "creation"
+msgstr "Creation"
+
+
+msgid "updated"
+msgstr "Updated"
+
+
+msgid "there_are_no_results"
+msgstr "There are no results"
+
+
+msgid "description"
+msgstr "Description"
+
+
+msgid "contact_information"
+msgstr "Contact information"
+
+
+msgid "winning_and_replacement_contacts_can_be_seen"
+msgstr "Winning and replacement contacts can be seen."
+
+
+msgid "number_of_People_to_Win"
+msgstr "Number of People to Win"
+
+
+msgid "number_of_replacement_people"
+msgstr "Number of replacement people"
+
+
+msgid "the_end_date"
+msgstr "The end date"
+
+
+msgid "update_raffle"
+msgstr "Update Raffle"
+
+
+msgid "number_of_winners"
+msgstr "Winner"
+
+
+msgid "number_of_backups"
+msgstr "Backup"
+
+
+msgid "the_number_of_participants"
+msgstr "Participants"
+
+
+msgid "last_participation_date"
+msgstr "Last participation date"
+
+
+msgid "start_the_draw"
+msgstr "Start the draw"
+
+
+msgid "raffle_statistics"
+msgstr "Raffle Statistics"
+
+
+msgid "start_a_draw"
+msgstr "Start a draw ?"
+
+
+msgid "the_return_of_the_process_is_not_possible"
+msgstr "The return of the process is not possible."
+
+
+msgid "delete_the_raffle"
+msgstr "Delete the raffle?"
+
+
+msgid "raffle_results"
+msgstr "Raffle Results"
+
+
+msgid "status"
+msgstr "Status"
+
+
+msgid "loading"
+msgstr "Loading"
+
+
+msgid "sorry_there_was_an_error"
+msgstr "Sorry there was an error"
+
+
+msgid "processing"
+msgstr "Processing"
+
+
+msgid "no_statistics_has_been_found_for_the_time_being"
+msgstr "No statistics has been found for the time being."
+
+
+msgid "participation"
+msgstr "Participation"
+
+
+msgid "querying"
+msgstr "Querying"
+
+
+msgid "winning"
+msgstr "Winning"
+
+
+msgid "replacement"
+msgstr "Replacement"
+
+
+msgid "date_of_participation"
+msgstr "Date of Participation"
+
+
+msgid "Feedback"
+msgstr "Feedback"
+
+
+msgid "you_took_the_lottery"
+msgstr "You Took The Lottery"
+
+
+msgid "the_title_cannot_be_blank"
+msgstr "The title cannot be blank!"
+
+
+msgid "description_cannot_be_left_blank"
+msgstr "Description cannot be left blank!"
+
+
+msgid "contact_information_cannot_be_blank"
+msgstr "Contact information cannot be blank!"
+
+
+msgid "end_date_cannot_be_blank"
+msgstr "End date cannot be blank!"
+
+
+msgid "the_number_of_winners_cannot_be_blank"
+msgstr "The number of winners cannot be blank!"
+
+
+msgid "the_number_of_replacement_people_cannot_be_blank"
+msgstr "The number of replacement people cannot be blank!"
+
+
+msgid "the_number_of_people_to_win_cannot_be_less_than_zero_or_zero"
+msgstr "The number of people to win cannot be less than zero or zero !"
+
+
+msgid "the_number_of_backup_contacts_cannot_be_less_than_zero"
+msgstr "The number of backup contacts cannot be less than zero !"
+
+
+msgid "the_title_cannot_be_greater_than_60_characters"
+msgstr "The title cannot be greater than 60 characters !"
+
+
+msgid "the_description_cannot_be_greater_than_350_characters"
+msgstr "The description cannot be greater than 350 characters !"
+
+
+msgid "contact_information_cannot_be_greater_than_350_characters"
+msgstr "Contact information cannot be greater than 350 characters !"
+
+
+msgid "the_number_of_people_who_will_win_can_not_be_more_than_50"
+msgstr "The number of people who will win can not be more than 50 !"
+
+
+msgid "the_number_of_reserve_persons_cannot_be_more_than_50"
+msgstr "The number of reserve persons cannot be more than 50 !"
+
+
+msgid "raffle_created"
+msgstr "Raffle Created"
+
+
+msgid "the_lottery_doesnt_update_because_it_started"
+msgstr "The lottery doesn't update because it started!"
+
+
+msgid "raffle_deleted_update_failed"
+msgstr "Raffle deleted update failed"
+
+
+msgid "raffle_updated"
+msgstr "Raffle Updated"
+
+
+msgid "no_raffles_found"
+msgstr "No raffles found"
+
+
+msgid "no_attendance_for_the_raffle_was_deleted"
+msgstr "No attendance for the raffle was deleted"
+
+
+msgid "ended_participation"
+msgstr "Ended participation"
+
+
+msgid "you_cant_participate_in_your_own_lottery"
+msgstr "You can't participate in your own lottery !"
+
+
+msgid "you_ve_already_joined"
+msgstr "You've already joined"
+
+
+msgid "sufficient_participants_could_not_be_provided"
+msgstr "Sufficient participants could not be provided"
+
+
+msgid "the_raffle_has_already_started"
+msgstr "The raffle has already started"
+
+
+msgid "cannot_start_because_the_raffle_was_deleted"
+msgstr "Cannot start because the raffle was deleted"
+
+
+msgid "the_raffle_starts_in_minutes"
+msgstr "The raffle starts in 10 minutes"
+
+
+msgid "your_deletion_request_has_already_been_received"
+msgstr "Your deletion request has already been received"
+
+
+msgid "could_not_be_deleted_because_the_lottery_was_started"
+msgstr "Could not be deleted because the lottery was started"
+
+
+msgid "your_request_for_deletion_has_been_received"
+msgstr "Your request for deletion has been received"
+
+
+msgid "no_contact_found"
+msgstr "No contact found"
+
+
+msgid "feedback_cant_be_left_blank"
+msgstr "Feedback can't be left blank !"
+
+
+msgid "the_feedback_cannot_be_more_than_350_characters"
+msgstr "The feedback cannot be more than 350 characters !"
+
+
+msgid "send"
+msgstr "Send"
+
+
+msgid "ranking"
+msgstr "Ranking"
+
+
+msgid "query"
+msgstr "Query"
+
+
+msgid "name"
+msgstr "Name"
+
+
+msgid "surname"
+msgstr "Surname"
+
+
+msgid "secret_key"
+msgstr "Secret key"
+
+
+msgid "winners"
+msgstr "Winners"
+
+
+msgid "reserves"
+msgstr "Reserves"
+
+
+msgid "personal_information"
+msgstr "Personal information"
+
+
+msgid "special_for_you"
+msgstr "Special for you"
+
+
+msgid "you_dont_win"
+msgstr "You don't win"
+
+
+msgid "you"
+msgstr "You"
+
+
+msgid "accountdetails"
+msgstr "Account Details"
+
+
+msgid "action"
+msgstr "Action"
+
+
+msgid "ip_address"
+msgstr "Ip Address"
+
+
+msgid "date_of_action"
+msgstr "Date of Action"
+
+
+msgid "share"
+msgstr "Share"
+
+
+msgid "copied"
+msgstr "Copied"
+
+
+msgid "communication_status"
+msgstr "Communication Status"
+
+
+msgid "contact_established"
+msgstr "Contact established"
+
+
+msgid "couldnt_contact"
+msgstr "Couldn't contact"
+
+
+msgid "tags"
+msgstr "Tags"
+
+
+msgid "at_least_two_labels_must_be_entered"
+msgstr "At least two labels must be entered."
+
+
+msgid "up_to_four_labels_must_be_entered"
+msgstr "Up to four labels must be entered."
+
+
+msgid "At_least_one_country_must_be_selected"
+msgstr "At least one country must be selected."
+
+
+msgid "Up_to_ten_countries_must_be_selected"
+msgstr "Up to ten countries must be selected."
+
+
+msgid "Is_unavailable_in_your_country"
+msgstr "Is unavailable in your country."
+
+
+msgid "raffle_disabled"
+msgstr "raffle disabled"
+
+
+msgid "Countries_to_be_published"
+msgstr "Countries to be published"
+
+
+msgid "QR_code"
+msgstr "QR code"
+
+
+msgid "Continue_with_Google"
+msgstr "Continue with Google"
+
+
+msgid "Continue_with_QR_code"
+msgstr "Continue with QR code"
+
+
+msgid "QR_code_generated"
+msgstr "QR code generated"
+
+
+msgid "QR_code_was_used"
+msgstr "QR code was used"
+
+
+msgid "url_cannot_be_empty"
+msgstr "url cannot be empty"
+
+
+msgid "select_product_type"
+msgstr "select product type"
+
+
+msgid "The_product_has_been_sent"
+msgstr "The product has been sent"
+
+
+msgid "404_not_found"
+msgstr "404 not found"
+
+
+msgid "invalid_url"
+msgstr "invalid url"
+
+
+msgid "Add_product"
+msgstr "Add product"
+
+
+msgid "Product_type"
+msgstr "Product type"
+
+
+msgid "Choose"
+msgstr "Choose"
+
+
+msgid "Product_sale"
+msgstr "Product sale"
+
+
+msgid "Product_raffle"
+msgstr "Product raffle"
+
+
+msgid "Raffle_search"
+msgstr "Raffle search"
+
+
+msgid "Explore"
+msgstr "Explore"
+
+
+msgid "Trend_tags"
+msgstr "Trend tags"
+
+
+msgid "Product_details"
+msgstr "Product details"
+
+
+msgid "You_may_be_interested_in"
+msgstr "You may be interested in"
+
+
+msgid "Search"
+msgstr "Search"

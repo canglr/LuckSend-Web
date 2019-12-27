@@ -1,0 +1,836 @@
+{% extends 'layout/layout_content.html' %}
+
+{% block title %}
+{{ gettext("sweepstakes_i_manage") }}
+{% endblock %}
+
+{% block bgtitle %}
+{{ gettext("sweepstakes_i_manage") }}
+{% endblock %}
+
+{% block content %}
+    <div class="card">
+  <div class="card-body">
+
+  <div class="card">
+        <div class="card-body">
+            <a class="btn btn-primary" href="#" onclick="RaffleCountriesList()" data-toggle="modal" data-target="#CreateRaffleModal"><i class="fas fa-plus"></i> {{ gettext("create_raffle") }}</a>
+        </div>
+    </div>
+
+  <hr>
+
+<div class="card">
+    <div class="card-body">
+{% if raffles.items %}
+<div class="table-responsive">
+   <table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">{{ gettext("title") }}</th>
+      <th scope="col">{{ gettext("creation") }}</th>
+      <th scope="col">{{ gettext("updated") }}</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for raffle in raffles.items %}
+    <tr>
+      <td scope="row"><label title="{{ raffle.title }}">{{ raffle.title[:25] }}</label></td>
+      <td>{{ raffle.creation_date|datetime_short }} (UTC)</td>
+      <td>{{ raffle.last_update|datetime_short }} (UTC)</td>
+      <td>
+          {% if raffle.completed %} <button onclick="RaffleResult('{{ raffle.id_share|aes_encode }}');" type="button" class="btn btn-primary btn-sm"><i class="fas fa-star"></i></button>{% endif %}
+          <button onclick="RaffleUrl('{{ raffle.id_share }}');" type="button" class="btn btn-primary btn-sm"><i class="fas fa-link"></i></button>
+          <button onclick="RaffleStats('{{ raffle.id_share|aes_encode }}');" type="button" class="btn btn-primary btn-sm"><i class="far fa-chart-bar"></i></button>
+          <button onclick="RaffleShow('{{ raffle.id_share|aes_encode }}');" type="button" class="btn btn-primary btn-sm"><i class="far fa-eye"></i></button>
+          <button onclick="RaffleUpdate('{{ raffle.id_share|aes_encode }}');" type="button" class="btn btn-primary btn-sm" {% if raffle.status %} disabled="disabled" {% endif %}><i class="fas fa-wrench"></i></button>
+      </td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+</div>
+
+    {% if prev_url %}
+    <a class="btn btn-primary btn-sm" href="{{ prev_url }}"><i class="fas fa-arrow-left"></i></a>
+    {% endif %}
+    {% if next_url %}
+    <a class="btn btn-primary btn-sm" href="{{ next_url }}"><i class="fas fa-arrow-right"></i></a>
+    {% endif %}
+
+    {% else %}
+        <div class="col-md-12 text-center">
+            <h5>{{ gettext("there_are_no_results") }}</h5>
+        </div>
+    {% endif %}
+        </div>
+</div>
+  </div>
+    </div>
+{% endblock %}
+
+
+{% block modal %}
+
+<div class="modal fade" id="CreateRaffleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">{{ gettext("create_raffle") }}</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">
+              <div class="form-group">
+                <small><b><label>{{ gettext("title") }}:</label></b></small>
+                <input type="text" class="form-control" autocomplete="off" id="title">
+              </div>
+
+              <div class="form-group">
+                <small><b><label>{{ gettext("description") }}:</label></b></small>
+                <textarea rows="6" class="form-control" id="description"></textarea>
+              </div>
+
+
+              <div class="form-group">
+                <small><b><label>{{ gettext("contact_information") }}:</label></b></small>
+                  <small><i>({{ gettext("winning_and_replacement_contacts_can_be_seen") }})</i></small>
+                <textarea rows="6" class="form-control" id="contact_information"></textarea>
+              </div>
+
+
+              <div class="form-group">
+                <small><b><label>{{ gettext("number_of_People_to_Win") }}:</label></b></small>
+                <input type="number" class="form-control" autocomplete="off" id="winners">
+              </div>
+
+              <div class="form-group">
+                <small><b><label>{{ gettext("number_of_replacement_people") }}:</label></b></small>
+                <input type="number" class="form-control" autocomplete="off" value="0" id="reserves">
+              </div>
+
+              <div class="form-group">
+                <small><b><label>{{ gettext("tags") }}:</label></b></small>
+                <input type="text" class="form-control" autocomplete="off" id="tags">
+              </div>
+
+              <div class="form-group">
+                <small><b><label>{{ gettext("Countries_to_be_published") }}:</label></b></small>
+                <select id="countries_list">
+                </select>
+              </div>
+
+              <div class="form-group">
+                <small><b><label>{{ gettext("the_end_date") }}:</label></b></small>
+                <input type="datetime-local" class="form-control" autocomplete="off" id="expiration">
+              </div>
+
+          </div>
+          <div class="modal-footer">
+              <button class="btn btn-secondary btn-sm" type="button" data-dismiss="modal"><i class="fas fa-times"></i></button>
+              <button class="btn btn-primary btn-sm" onclick="CreateRaffle();" type="button"><i class="fas fa-check"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="modal fade" id="RaffleShowModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+              <div class="container">
+                  <div class="card-body">
+                      <div class="card text-center">
+                          <div class="card-body">
+                              <h5 class="card-title raffle-title"></h5>
+                              <p class="card-text"><small class="raffle-description"></small></p>
+                          </div>
+                          <ul class="list-group list-group-flush">
+                              <li class="list-group-item">
+                                  <label><h6>{{ gettext("contact_information") }}</h6></label><br>
+                                  <small><label class="raffle-contact_information"></label></small>
+                              </li>
+                              <li class="list-group-item">
+                                  <label><h6>{{ gettext("number_of_winners") }}</h6></label><br>
+                                  <label class="raffle-winners"></label>
+                              </li>
+                              <li class="list-group-item">
+                                  <label><h6>{{ gettext("number_of_backups") }}</h6></label><br>
+                                  <label class="raffle-reserves"></label>
+                              </li>
+                               <li class="list-group-item">
+                                  <label><h6>{{ gettext("the_number_of_participants") }}</h6></label><br>
+                                  <label class="raffle-joincount"></label>
+                              </li>
+                              <li class="list-group-item">
+                                  <label><h6>{{ gettext("last_participation_date") }}</h6></label><br>
+                                  <label class="raffle-expiration"></label>
+                              </li>
+                              <li class="list-group-item">
+                                  <input class="raffle-id" value="" type="hidden">
+                                  <button type="button" data-toggle="modal" data-dismiss="modal" data-target="#RaffleStartModal" id="raffle-start"  class="btn btn-primary btn-sm">{{ gettext("start_the_draw") }}</button>
+                              </li>
+                          </ul>
+
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="modal-footer">
+              <button type="button" data-toggle="modal" data-dismiss="modal" data-target="#RaffleDeleteModal" id="raffle-delete"  class="btn btn-primary btn-sm"><i class="fas fa-trash-alt"></i></button>
+              <button class="btn btn-secondary btn-sm" type="button" data-dismiss="modal"><i class="fas fa-times"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+    <div class="modal fade" id="UpdateRaffleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">{{ gettext("update_raffle") }}</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">
+              <div class="form-group">
+                <small><b><label for="title">{{ gettext("title") }}:</label></b></small>
+                <input type="text" class="form-control" autocomplete="off" id="raffle_up_title">
+              </div>
+
+              <div class="form-group">
+                <small><b><label for="title">{{ gettext("description") }}:</label></b></small>
+                <textarea rows="6" class="form-control" id="raffle_up_description"></textarea>
+              </div>
+
+              <div class="form-group">
+                <small><b><label for="title">{{ gettext("contact_information") }}:</label></b></small>
+                  <small><i>({{ gettext("winning_and_replacement_contacts_can_be_seen") }})</i></small>
+                <textarea rows="6" class="form-control" id="raffle_up_contact_information"></textarea>
+              </div>
+
+              <div class="form-group">
+                <small><b><label for="title">{{ gettext("number_of_People_to_Win") }}:</label></b></small>
+                <input type="number" class="form-control" autocomplete="off" id="raffle_up_winners">
+              </div>
+
+              <div class="form-group">
+                <small><b><label for="title">{{ gettext("number_of_replacement_people") }}:</label></b></small>
+                <input type="number" class="form-control" autocomplete="off"  id="raffle_up_reserves">
+              </div>
+
+              <div class="form-group">
+                <small><b><label>{{ gettext("tags") }}:</label></b></small>
+                <input type="text" class="form-control" autocomplete="off" id="tags_update">
+              </div>
+
+              <div class="form-group">
+                <small><b><label>{{ gettext("Countries_to_be_published") }}:</label></b></small>
+                <select id="countries_up_list">
+                </select>
+              </div>
+
+              <div class="form-group">
+                <small><b><label for="title">{{ gettext("the_end_date") }}:</label></b></small>
+                <input type="datetime-local" class="form-control" autocomplete="off" id="raffle_up_expiration">
+              </div>
+
+          </div>
+          <div class="modal-footer">
+              <input type="hidden" class="form-control" autocomplete="off" id="raffle_up_id">
+              <button class="btn btn-secondary btn-sm" type="button" data-dismiss="modal"><i class="fas fa-times"></i></button>
+              <button class="btn btn-primary btn-sm" onclick="RaffleUpdatePost();" type="button"><i class="fas fa-check"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+    <div class="modal fade" id="StatsRaffleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">{{ gettext("raffle_statistics") }}</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">
+
+              <div id="stats"></div>
+
+          </div>
+          <div class="modal-footer">
+              <button class="btn btn-secondary btn-sm" type="button" data-dismiss="modal"><i class="fas fa-times"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="modal fade" id="RaffleStartModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">{{ gettext("start_a_draw") }}</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">{{ gettext("the_return_of_the_process_is_not_possible") }}</div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary btn-sm" type="button" data-dismiss="modal"><i class="fas fa-times"></i></button>
+            <button class="btn btn-primary btn-sm" onclick="RaffleStart();" type="button" data-dismiss="modal"><i class="fas fa-check"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="modal fade" id="RaffleDeleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">{{ gettext("delete_the_raffle") }}</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">{{ gettext("the_return_of_the_process_is_not_possible") }}</div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary btn-sm" type="button" data-dismiss="modal"><i class="fas fa-times"></i></button>
+            <button class="btn btn-primary btn-sm" onclick="RaffleDelete();" type="button" data-dismiss="modal"><i class="fas fa-trash-alt"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+    <div class="modal fade" id="RaffleResultModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">{{ gettext("raffle_results") }}</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">
+
+              <div class="raffle-result"></div>
+
+          </div>
+          <div class="modal-footer">
+              <button class="btn btn-secondary btn-sm" type="button" data-dismiss="modal"><i class="fas fa-times"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="modal fade" id="RaffleSecretKeyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+              <div class="container">
+                  <div class="card-body">
+                      <div class="card text-center">
+                          <ul class="list-group list-group-flush">
+                              <li class="list-group-item text-capitalize">
+                                  <label><h6>{{ gettext("account_id") }}</h6></label><br>
+                                  <small><label class="raffle-account-number"></label></small>
+                              </li>
+                              <li class="list-group-item text-capitalize">
+                                  <label><h6>{{ gettext("name_surname") }}</h6></label><br>
+                                  <small><label class="raffle-name-surname"></label></small>
+                              </li>
+                              <li class="list-group-item text-capitalize">
+                                  <label><h6>{{ gettext("status") }}</h6></label><br>
+                                  <small><label class="raffle-status"></label></small>
+                              </li>
+                          </ul>
+
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="modal-footer">
+              <button class="btn btn-secondary btn-sm" type="button" data-dismiss="modal"><i class="fas fa-times"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="modal fade" id="UrlRaffleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">{{ gettext("share") }}</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">
+
+              <div class="card">
+                    <div class="card-body">
+                        <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <div class="input-group mb-2 mr-sm-2">
+                                    <div class="input-group-prepend">
+                                    <div class="input-group-text"><i class="fas fa-copy"></i></div>
+                                    </div>
+                                        <input type="text" readonly="readonly" class="form-control" autocomplete="off" id="raffle-link-share">
+                                    </div>
+
+                                </div>
+
+                                <div class="form-group col-md-12">
+                                    <div class="input-group mb-2 mr-sm-2">
+                                    <div class="input-group-prepend">
+                                    <div class="input-group-text"><i class="fas fa-copy"></i></div>
+                                    </div>
+                                        <input type="text" readonly="readonly" class="form-control" autocomplete="off" id="raffle-widget-share">
+                                    </div>
+
+                                </div>
+
+                                <div class="form-group col-md-12">
+                                    <a class="btn btn-primary btn-sm float-right" target="_blank" id="raffle-link-external"><i class="fas fa-external-link-alt"></i></a>
+                                </div>
+                        </div>
+                    </div>
+              </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+
+
+{% endblock %}
+
+
+{% block js %}
+ <script type="text/javascript">
+    $(document).ready(function () {
+
+
+
+    });
+
+
+    function CreateRaffle() {
+            $.ajax({
+                url: '/CreateRaffle',
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    title: document.getElementById('title').value,
+                    description: document.getElementById('description').value,
+                    expiration: moment(document.getElementById('expiration').value).utc().format(),
+                    winners: document.getElementById('winners').value,
+                    reserves: document.getElementById('reserves').value,
+                    contact_information: document.getElementById('contact_information').value,
+                    tags: document.getElementById('tags').value,
+                    countries: $('#countries_list')[0].selectize.items.join(',')
+                },
+                success: function (result) {
+                    if(result.status) {
+                        document.getElementById('title').value = "";
+                        document.getElementById('description').value = "";
+                        document.getElementById('expiration').value = "";
+                        document.getElementById('winners').value = "";
+                        document.getElementById('reserves').value = "0";
+                        document.getElementById('contact_information').value = "";
+                        $("#CreateRaffleModal").modal('hide');
+                        setTimeout(reloadpage(),2000);
+
+                    }
+                    alertbox(result.result,result.status);
+                },
+                error: function (error) {
+                    alert(error)
+                }
+            });
+        }
+
+
+
+    function RaffleShow(id) {
+            loading('{{ gettext("loading") }}');
+            var id = id;
+            $.ajax({
+                url: '/RaffleShow',
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    id: id
+                },
+                success: function (result) {
+                        var StringtoUtc  = moment.utc(result.expiration).toDate();
+                        $('.raffle-title').html(result.title);
+                        $('.raffle-description').html(result.description);
+                        $('.raffle-contact_information').html(result.contact_information);
+                        $('.raffle-winners').html(result.winners);
+                        $('.raffle-reserves').html(result.reserves);
+                        $('.raffle-expiration').html(moment(StringtoUtc).format("YYYY-MM-DD HH:mm:ss"));
+                        $('.raffle-joincount').html(result.raffle_join_count);
+                        if(result.status)
+                        {
+                            document.getElementById('raffle-start').disabled = true;
+                            document.getElementById('raffle-delete').disabled = true;
+                        }else
+                        {
+                            document.getElementById('raffle-start').disabled = false;
+                            document.getElementById('raffle-delete').disabled = false;
+                        }
+                        raffle_id_set(result.id);
+                        swal.close();
+                        $("#RaffleShowModal").modal('show');
+                },
+                error: function (error) {
+                    swal.close();
+                    alertbox('{{ gettext("sorry_there_was_an_error") }}',false);
+                }
+            });
+        }
+
+
+
+        function RaffleUpdate(id) {
+            loading('{{ gettext("loading") }}');
+            RaffleCountriesList();
+            var id = id
+            $.ajax({
+                url: '/RaffleShow',
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    id: id
+                },
+                success: function (result) {
+                        var StringtoUtc  = moment.utc(result.expiration).toDate();
+                        document.getElementById('raffle_up_id').value = result.id;
+                        document.getElementById('raffle_up_title').value = result.title;
+                        document.getElementById('raffle_up_description').value = result.description;
+                        document.getElementById('raffle_up_contact_information').value = result.contact_information;
+                        document.getElementById('raffle_up_winners').value = result.winners;
+                        document.getElementById('raffle_up_reserves').value = result.reserves;
+                        document.getElementById('raffle_up_expiration').value = moment(StringtoUtc).format("YYYY-MM-DDTHH:mm:ss");
+                        //document.getElementById('tags_update-selectized').value = result.tags;
+                        let selectize = $select[0].selectize;
+                        selectize.addOption(result.tags);
+                        tags_value = [];
+                        for (let i=0; i<result.tags.length; i++)
+                        {
+                            tags_value.push(result.tags[i]["text"]);
+                        }
+                        selectize.setValue(tags_value);
+
+                        let $selectupdate = $(document.getElementById('countries_up_list')).selectize();
+                        let selectizeupdate = $selectupdate[0].selectize;
+                        selectizeupdate.setValue(result.countries_selected);
+
+                        swal.close();
+                        $("#UpdateRaffleModal").modal('show');
+                },
+                error: function (error) {
+                    swal.close();
+                    alertbox('{{ gettext("sorry_there_was_an_error") }}',false);
+                }
+            });
+        }
+
+
+        function RaffleUpdatePost() {
+            loading('{{ gettext("processing") }}');
+            $.ajax({
+                url: '/RaffleUpdate',
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    id: document.getElementById('raffle_up_id').value,
+                    title: document.getElementById('raffle_up_title').value,
+                    description: document.getElementById('raffle_up_description').value,
+                    contact_information: document.getElementById('raffle_up_contact_information').value,
+                    winners: document.getElementById('raffle_up_winners').value,
+                    reserves: document.getElementById('raffle_up_reserves').value,
+                    expiration: moment(document.getElementById('raffle_up_expiration').value).utc().format(),
+                    tags: document.getElementById('tags_update').value,
+                    countries: $('#countries_up_list')[0].selectize.items.join(',')
+
+                },
+                success: function (result) {
+                        alertbox(result.result,result.status);
+
+                },
+                error: function (error) {
+                    swal.close();
+                    alertbox('{{ gettext("sorry_there_was_an_error") }}',false);
+                }
+            });
+        }
+
+
+
+        function RaffleStats(id) {
+            loading('{{ gettext("loading") }}');
+            var id = id;
+            $.ajax({
+                url: '/RaffleStats',
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    id: id
+                },
+                success: function (result) {
+                            swal.close();
+                            if(result.length != 0) {
+                                $("#StatsRaffleModal").modal('show');
+                                $("#stats").empty();
+                                setTimeout(function () {
+                                    m = Morris.Line({
+                                        element: 'stats',
+                                        data: result.reverse(),
+                                        resize: true,
+                                        // The name of the data record attribute that contains x-values.
+                                        xkey: 'year',
+                                        // A list of names of data record attributes that contain y-values.
+                                        ykeys: ['value'],
+                                        parseTime: false,
+                                        // Labels for the ykeys -- will be displayed when you hover over the
+                                        // chart.
+                                        labels: ['{{ gettext("participation") }}'],
+                                        pointFillColors: ['#707f9b'],
+                                        pointStrokeColors: ['#707f9b'],
+                                        lineColors: ['#707f9b', '#707f9b', '#707f9b'],
+                                    });
+                                    $(window).on("resize", function () {
+                                        m.redraw();
+                                    });
+                                }, 500);
+                            }else{
+                               alertbox('{{ gettext("no_statistics_has_been_found_for_the_time_being") }}',false);
+                            }
+
+
+                },
+                error: function (error) {
+                    swal.close();
+                    alertbox('{{ gettext("sorry_there_was_an_error") }}',false);
+                }
+            });
+        }
+
+
+        var raffle_id;
+
+        function raffle_id_set(id) {
+            raffle_id = id;
+        }
+
+        function RaffleStart() {
+            loading('{{ gettext("processing") }}');
+            var id = raffle_id;
+            $.ajax({
+                url: '/RaffleStart',
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    id: id
+                },
+                success: function (result) {
+                    alertbox(result.result,result.status);
+                },
+                error: function (error) {
+                    swal.close();
+                    alertbox('{{ gettext("sorry_there_was_an_error") }}',false);
+                }
+            });
+        }
+
+
+        function RaffleDelete() {
+            loading('{{ gettext("processing") }}');
+            var id = raffle_id;
+            $.ajax({
+                url: '/RaffleDelete',
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    id: id
+                },
+                success: function (result) {
+                    alertbox(result.result,result.status);
+                    reloadpage();
+                },
+                error: function (error) {
+                    swal.close();
+                    alertbox('{{ gettext("sorry_there_was_an_error") }}',false);
+                }
+            });
+        }
+
+
+        function RaffleResult(id) {
+            loading('{{ gettext("loading") }}');
+            var id = id;
+            $.ajax({
+                url: '/RaffleResult',
+                type: 'POST',
+                data: {
+                    id: id
+                },
+                success: function (result) {
+                        $('.raffle-result').html(result);
+                        swal.close();
+                        $("#RaffleResultModal").modal('show');
+                },
+                error: function (error) {
+                    swal.close();
+                    alertbox('{{ gettext("sorry_there_was_an_error") }}',false);
+                }
+            });
+        }
+
+
+
+        function RaffleSecretKeyCheck(id) {
+            $("#account-information").hide();
+            loading('{{ gettext("querying") }}');
+            var secretkey = document.getElementById('raffle_secret_key').value;
+            $.ajax({
+                url: '/RaffleSecretKeyCheck',
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    id: id,
+                    secretkey: secretkey
+                },
+                success: function (result) {
+                    if(result.error != true) {
+                        $('.raffle-account-number').html(result.id);
+                        $('.raffle-name').html(result.name);
+                        $('.raffle-status').html(result.status);
+                        if(result.status) {
+                            $('.raffle-status').html('{{ gettext("winning") }}');
+                        }else{
+                            $('.raffle-status').html('{{ gettext("replacement") }}');
+                        }
+                        swal.close();
+                        $("#account-information").show();
+                    }else{
+                        alertbox(result.result,false);
+                    }
+                },
+                error: function (error) {
+                    swal.close();
+                    alertbox('{{ gettext("sorry_there_was_an_error") }}',false);
+                }
+            });
+        }
+
+
+        function RaffleUrl(id) {
+            $("#UrlRaffleModal").modal('show');
+            url = window.location.origin+"/share/"+id;
+            widget_url = window.location.origin+"/widget/"+id;
+            widget = "<iframe src='"+widget_url+"' width='100%' height='250px'>";
+            document.getElementById("raffle-link-share").value = url;
+            document.getElementById("raffle-widget-share").value = widget;
+            document.getElementById("raffle-link-external").href = url;
+            document.getElementById("raffle-link-share").onclick = function() {
+                this.select();
+                document.execCommand('copy');
+                alertbox('{{ gettext("copied") }}',true)
+            }
+
+            document.getElementById("raffle-widget-share").onclick = function() {
+                this.select();
+                document.execCommand('copy');
+                alertbox('{{ gettext("copied") }}',true)
+            }
+        }
+
+
+        function RaffleCountriesList() {
+            $.ajax({
+                url: '/RaffleCountriesList',
+                type: 'POST',
+                dataType: 'json',
+                success: function (result) {
+                    let $select = $(document.getElementById('countries_list')).selectize();
+                    let selectize = $select[0].selectize;
+                    selectize.addOption(result);
+                    //selectize.refreshOptions();
+                    selectize.setValue('ALL');
+
+                    let $selectupdate = $(document.getElementById('countries_up_list')).selectize();
+                    let selectizeupdate = $selectupdate[0].selectize;
+                    selectizeupdate.addOption(result);
+
+                },
+                error: function (error) {
+                    swal.close();
+                    alertbox('{{ gettext("sorry_there_was_an_error") }}',false);
+                }
+            });
+        }
+
+    function reloadpage() {
+        location.reload();
+    }
+
+
+    $('#tags').selectize({
+    delimiter: ',',
+    persist: true,
+    maxTags: 4,
+    create: function(input) {
+        return {
+            value: input,
+            text: input
+            }
+        }
+    });
+
+    let $select = $('#tags_update').selectize({
+    delimiter: ',',
+    persist: true,
+    maxTags: 4,
+    create: true
+    });
+
+
+    $('#countries_list').selectize({
+	 maxItems: 10,
+     delimiter: ',',
+     persist: true
+    });
+
+    $('#countries_up_list').selectize({
+	 maxItems: 10,
+     delimiter: ',',
+     persist: true
+    });
+
+</script>
+{% endblock %}
