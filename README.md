@@ -10,6 +10,7 @@
  - Follow the sweepstakes on Instagram
  - Add raffles through Instagram
  - Search for raffles in the application
+ - Multi-language support
 
 # Related projects 
  - [LuckSend](https://github.com/necipcanguler/LuckSend) (required)
